@@ -1,0 +1,9 @@
+/* Card styles */
+.card-su-img-left {
+    width: 50%;
+    background: scroll center url(../img/solutions.jpg);
+    background-size: cover;
+}
+.spacing-su-inner {
+    padding: 4rem;
+}
