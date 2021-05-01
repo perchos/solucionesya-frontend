@@ -10,7 +10,7 @@ const Home = () => {
       <Container className='my-4'>
         <Row className='justify-content-center'>
           <CardGroup>
-            <Card style={{ width: '18rem' }}>
+            <Card className='mx-5' style={{ width: '18rem' }}>
               <Card.Header>
                 <Card.Title>Servicio 1</Card.Title>
               </Card.Header>
@@ -27,7 +27,7 @@ const Home = () => {
                 </Card.Text>
               </Card.Body>
             </Card>
-            <Card style={{ width: '18rem' }}>
+            <Card className='mx-5' style={{ width: '18rem' }}>
               <Card.Header>
                 <Card.Title>Servicio 2</Card.Title>
               </Card.Header>
@@ -44,7 +44,7 @@ const Home = () => {
                 </Card.Text>
               </Card.Body>
             </Card>
-            <Card style={{ width: '18rem' }}>
+            <Card className='mx-5' style={{ width: '18rem' }}>
               <Card.Header>
                 <Card.Title>Servicio 3</Card.Title>
               </Card.Header>

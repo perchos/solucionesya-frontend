@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Navbar,
   Nav,
@@ -11,16 +11,33 @@ import {
 import IsLogin from './IsLogin';
 import IsLogout from './IsLogout';
 
-function Logged({ isLogged }) {
-  if (isLogged) {
-    return <IsLogin />;
-  } else {
-    return <IsLogout />;
-  }
-}
+import Cookies from 'universal-cookie'
+import Axios from "axios";
+
+const url="http://localhost:5000/users"
+const cookies = new Cookies()
 
 const Header = () => {
-  const [isLogged, setIsLogged] = useState(false);
+
+  const [isLogged, setIsLogged] = useState(cookies.get ? true : false)
+
+  const [user, setUser] = useState(null)
+
+  function getUser(){
+
+    Axios.get(`${url}/${cookies.get('userId')}`)
+      .then((res) => {
+        setUser(true)
+      })
+      .catch((err) => {
+        setUser(null)
+      })
+    
+  }
+
+  useEffect(() => {
+    getUser()
+  }, [])
 
   return (
     <header>
@@ -45,7 +62,8 @@ const Header = () => {
             <Button variant='outline-info'>Buscar</Button>
           </Form>
         </Nav>
-        <Logged isLogged={isLogged} />
+        {/* <Logged isLogged={isLogged} /> */}
+        { user ? <IsLogin /> : <IsLogout/> }
       </Navbar>
     </header>
   );

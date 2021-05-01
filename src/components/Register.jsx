@@ -1,4 +1,5 @@
 import React from "react";
+import * as envVars from '../settings'
 import '../assets/styles/Register.css'
 
 const Register = () => {
@@ -12,7 +13,8 @@ const Register = () => {
     const samePass = passValidator(e.target.userPassword.value, e.target.userConfirmPassword.value)
 
     if (samePass === true){
-      const url = 'http://solucionesyaauth-env.eba-i586qsxd.us-east-1.elasticbeanstalk.com/auth/register'
+      console.log(envVars.IP_CONNECT)
+      const url = `http://${envVars.IP_CONNECT}/auth/register`
 
       let data = {
         email: e.target.userEmail.value,

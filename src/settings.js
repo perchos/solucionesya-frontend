@@ -1,0 +1,1 @@
+export const IP_CONNECT = 'localhost:5000'
