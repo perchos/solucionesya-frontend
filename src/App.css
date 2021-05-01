@@ -1,9 +1,5 @@
 /* General Styles */
 
-* {
-  overflow: hidden;
-}
-
 body {
   background: linear-gradient(to right, #28f39a, #098baf);
 }
