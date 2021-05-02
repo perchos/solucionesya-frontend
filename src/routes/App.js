@@ -18,7 +18,7 @@ const App = () => {
         <Route exact path='/register' component={Register} />
         <Route exact path='/publishes' component={Publishes} />
         <Route exact path='/user/:userId' component={Users} />
-        <Route exact path='/service' component={Service} />
+        <Route exact path="/post/:postId" component={Service} />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>
