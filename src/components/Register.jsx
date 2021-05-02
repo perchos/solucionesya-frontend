@@ -1,6 +1,7 @@
 import React from "react";
 import * as envVars from '../settings'
 import '../assets/styles/Register.css'
+import Swal from 'sweetalert2'
 
 const Register = () => {
 
@@ -33,12 +34,18 @@ const Register = () => {
         console.log("Registed")
       }).catch(
         err => {
-            console.log(err)
+          console.log(err)
         }
       )
       e.preventDefault()
     } else {
-      alert("Las contraseñas no coinciden")
+      Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: 'Las contraseñas no coinciden',
+        showConfirmButton: false,
+        timer: 1500
+      })
       e.preventDefault()
     }
   }
