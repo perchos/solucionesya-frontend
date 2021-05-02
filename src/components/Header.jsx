@@ -25,13 +25,17 @@ const Header = () => {
 
   function getUser(){
 
-    Axios.get(`${url}/${cookies.get('userId')}`)
+    const authValidate = cookies.get('userId')
+
+    if (authValidate !== undefined){
+      Axios.get(`${url}/${authValidate}`)
       .then((res) => {
         setUser(true)
       })
       .catch((err) => {
         setUser(null)
       })
+    }
     
   }
 
