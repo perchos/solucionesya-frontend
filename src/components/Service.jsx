@@ -4,12 +4,9 @@ import { DiscussionEmbed } from 'disqus-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { DOMAIN, GET_POST_URL, GET_USER_URL } from '../utils/constants';
 import '../assets/styles/Publishes.css';
 import Logo from '../assets/img/consejo.svg';
-
-const DOMAIN = 'http://localhost:5000';
-const GET_POST_URL = `${DOMAIN}/api/posts`;
-const GET_USER_URL = `${DOMAIN}/users`;
 
 const DISQUS_SHORT_NAME = 'solucionesya';
 
