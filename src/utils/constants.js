@@ -1,4 +1,4 @@
-const DOMAIN = 'http://localhost:5000';
+export const DOMAIN = 'http://localhost:5000';
 
 // Images
 export const IMAGES_KEY_NAME = 'postImages';
@@ -24,3 +24,15 @@ export const GET_USER_POSTS_URL = `${DOMAIN}/users/posts`;
 
 // GET /:userId
 export const GET_USER_URL = `${DOMAIN}/users`;
+
+//
+
+// POST /auth/register
+export const REGISTER_USER = `${DOMAIN}/auth/register`;
+
+// POST /auth/login
+export const LOGIN_USER = `${DOMAIN}/auth/login`;
+
+// POST /auth/logout
+export const LOGOUT_USER = `${DOMAIN}/auth/logout`;
+

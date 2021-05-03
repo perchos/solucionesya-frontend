@@ -7,19 +7,20 @@ import {
   FormControl,
   Button,
 } from 'react-bootstrap';
-
 import IsLogin from './IsLogin';
 import IsLogout from './IsLogout';
+import Cookies from 'universal-cookie'
+import Axios from "axios";
+import { GET_USER_URL } from "../utils/constants"
 
-import Cookies from 'universal-cookie';
-import Axios from 'axios';
-
-const url = 'http://localhost:5000/users';
-const cookies = new Cookies();
+const url="http://localhost:5000/users"
+const cookies = new Cookies()
 
 const Header = ({ setCategory, setLocation, setSearch, getAll }) => {
   const [isLogged, setIsLogged] = useState(cookies.get ? true : false);
   const [user, setUser] = useState(null);
+const url = GET_USER_URL;
+const cookies = new Cookies();
 
   const handleCategory = (e) => setCategory(e);
   const handleLocation = (e) => setLocation(e);
@@ -85,7 +86,7 @@ const Header = ({ setCategory, setLocation, setSearch, getAll }) => {
           </Form>
         </Nav>
         {/* <Logged isLogged={isLogged} /> */}
-        {user ? <IsLogin /> : <IsLogout />}
+        { user ? <IsLogin setUser={setUser}/> : <IsLogout/> }
       </Navbar>
     </header>
   );
