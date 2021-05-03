@@ -28,7 +28,6 @@ function Users(props) {
         setUser({ ...res.data.data });
       })
       .catch((err) => {
-        console.log(props.match.params.userId);
         setUser({ data: {} });
         props.history.push('/login');
       });
@@ -50,7 +49,6 @@ function Users(props) {
       withCredentials: true,
     };
 
-    console.log('entre');
     Axios.delete(`${url}/api/posts/${postId}`, options)
       .then((res) => {
         Swal.fire({
@@ -62,7 +60,12 @@ function Users(props) {
         getPublishes();
       })
       .catch((error) => {
-        console.log(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error Eliminando',
+          showConfirmButton: false,
+          timer: 1500,
+        });
       });
   }
 
@@ -117,7 +120,6 @@ function Users(props) {
                 aria-labelledby="pills-home-tab"
               >
                 {posts.map((post) => {
-                  console.log(post);
                   return (
                     <div key={post._id} className="card mb-3">
                       <div className="row no-gutters">

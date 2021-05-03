@@ -15,12 +15,10 @@ const IsLogin = ({ setUser }) => {
 
     Axios.post(LOGOUT_USER, {}, options)
       .then((res) => {
-        // console.log(res);
         cookies.remove('userId', { path: '/' });
         setUser(null);
       })
       .catch((err) => {
-        console.log(err);
         Swal.fire({
           icon: 'error',
           title: "The session can't be closed",

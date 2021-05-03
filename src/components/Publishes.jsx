@@ -28,8 +28,6 @@ const Publishes = (props) => {
   const { register, handleSubmit, control } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
-
     const formData = new FormData();
 
     for (const key in data) {
@@ -59,24 +57,22 @@ const Publishes = (props) => {
     try {
       response = await axios.post(POST_POST_URL, formData, options);
       if (response.status === 201) {
-        Swal.fire({
-          position: 'top',
+        await Swal.fire({
           icon: 'success',
           title: 'Creación Correcta',
           showConfirmButton: false,
           timer: 1500,
         });
+        props.history.goBack();
       }
     } catch (error) {
       Swal.fire({
-        position: 'top',
         icon: 'error',
         title: 'Error creando la publicación',
         showConfirmButton: false,
         timer: 1500,
       });
     }
-    console.log(response);
   };
 
   return (

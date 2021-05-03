@@ -12,22 +12,31 @@ const LIMIT = 16;
 
 const DOMAIN = 'http://localhost:5000';
 
+const initialPaginationState = {
+  hasMore: false,
+  page: 1,
+  limit: LIMIT,
+};
+
 const Home = () => {
   const [category, setCategory] = useState('');
   const [location, setLocation] = useState('');
   const [search, setSearch] = useState('');
   const [posts, setPosts] = useState([]);
-  const [pagination, setPagination] = useState({
-    hasMore: false,
-    page: 1,
-    limit: LIMIT,
-  });
+  const [pagination, setPagination] = useState(initialPaginationState);
 
-  const getAll = async () => {
+  const getAll = async (reset) => {
+    let page;
+    if (reset) {
+      page = 1;
+    } else {
+      page = pagination.page;
+    }
+
     const options = {
       params: {
         limit: LIMIT,
-        page: pagination.page,
+        page,
         category,
         location,
         search,
@@ -38,15 +47,23 @@ const Home = () => {
       if (res.status === 200) {
         const json = await res.data;
         if (json.data) {
-          setPosts([...posts, ...json.data.docs]);
+          if (reset) setPosts(json.data.docs);
+          else setPosts([...posts, ...json.data.docs]);
+
           let hasMore;
+
           if (json.data.hasNextPage) hasMore = true;
           else hasMore = false;
-          setPagination({
+
+          const paginationObj = {
             ...pagination,
             page: pagination.page + 1,
             hasMore,
-          });
+          };
+
+          if (reset) paginationObj.page = 2;
+
+          setPagination(paginationObj);
         }
       }
     } catch (error) {

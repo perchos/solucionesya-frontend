@@ -77,7 +77,7 @@ const Header = ({ setCategory, setLocation, setSearch, getAll }) => {
               className="mr-sm-2"
               onChange={handleChange}
             />
-            <Button variant="outline-info" onClick={getAll}>
+            <Button variant="outline-info" onClick={() => getAll(true)}>
               Buscar
             </Button>
           </Form>
