@@ -3,6 +3,7 @@ import Axios from "axios";
 import Cookies from "universal-cookie";
 import "../assets/styles/Login.css";
 import Swal from 'sweetalert2'
+import { LOGIN_USER } from "../utils/constants"
 
 const cookies = new Cookies();
 
@@ -14,8 +15,7 @@ class Login extends Component {
       password: this.password,
     };
 
-    // TODO: LA URL DEL AXIOS NO DEBE ESTAR QUEMADA
-    Axios.post("http://localhost:5000/auth/login", data)
+    Axios.post(LOGIN_USER, data)
       .then((res) => {
         cookies.set("userId", res.data.uid, { path: "/" });
         this.props.history.push('/')

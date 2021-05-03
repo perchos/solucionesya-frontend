@@ -3,13 +3,14 @@ import axios from 'axios';
 import Header from './Header';
 import React, { useEffect, useState } from 'react';
 import { Container, Row, CardGroup, Card } from 'react-bootstrap';
+import { GET_POST_URL } from "../utils/constants"
 
 const Home = () => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
     const getAll = async () => {
-      const res = await axios.get('http://localhost:5000/api/posts'),
+      const res = await axios.get(GET_POST_URL),
         json = await res.data;
       setData(json.data);
     };

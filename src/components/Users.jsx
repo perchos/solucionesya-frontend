@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import Cookies from "universal-cookie";
 import Axios from "axios";
 import { Link } from 'react-router-dom'
+import { DOMAIN } from "../utils/constants"
 
 const cookies = new Cookies();
-const url = "http://localhost:5000";
+const url = DOMAIN;
 
 function Users(props) {
   const [isLogged, setIsLogged] = useState(cookies.get ? true : false);
@@ -16,10 +17,13 @@ function Users(props) {
   function getUser() {
     Axios.get(`${url}/users/${props.match.params.userId}`)
       .then((res) => {
+        console.log(props.match.params.userId)
         setUser({ ...res.data.data });
       })
       .catch((err) => {
+        console.log(props.match.params.userId)
         setUser({ data: {} });
+        props.history.push("/NotFound")
       });
   }
 

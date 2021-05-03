@@ -1,7 +1,8 @@
 import React from "react";
-import * as envVars from '../settings'
+import { DOMAIN } from "../utils/constants"
 import '../assets/styles/Register.css'
 import Swal from 'sweetalert2'
+import { REGISTER_USER } from "../utils/constants"
 
 const Register = () => {
 
@@ -14,8 +15,7 @@ const Register = () => {
     const samePass = passValidator(e.target.userPassword.value, e.target.userConfirmPassword.value)
 
     if (samePass === true){
-      console.log(envVars.IP_CONNECT)
-      const url = `http://${envVars.IP_CONNECT}/auth/register`
+      const url = REGISTER_USER
 
       let data = {
         email: e.target.userEmail.value,
