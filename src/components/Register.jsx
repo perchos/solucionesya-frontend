@@ -1,22 +1,28 @@
 import React from 'react';
-// import { DOMAIN } from "../utils/constants"
 import '../assets/styles/Register.css';
 import Swal from 'sweetalert2';
+import Cookies from 'universal-cookie';
+import Axios from 'axios';
 import { REGISTER_USER } from '../utils/constants';
 
-const Register = () => {
+const cookies = new Cookies();
+
+const Register = (props) => {
   function passValidator(pass, confirm) {
     return pass === confirm ? true : false;
   }
 
-  function registerUser(e) {
+  async function registerUser(e) {
+    e.preventDefault();
     const samePass = passValidator(
       e.target.userPassword.value,
       e.target.userConfirmPassword.value,
     );
 
     if (samePass === true) {
-      const url = REGISTER_USER;
+      const options = {
+        withCredentials: true,
+      };
 
       let data = {
         email: e.target.userEmail.value,
@@ -24,48 +30,33 @@ const Register = () => {
         password: e.target.userPassword.value,
       };
 
-      fetch(url, {
-        method: 'POST',
-        mode: 'cors',
-        credentials: 'include',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' },
-      })
-        .then((res) => {
-          console.log(res.status);
-          console.log(res);
-          if (res.status === 400) {
-            Swal.fire({
-              icon: 'error',
-              title: 'El usuario ya existe',
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          }
+      try {
+        const response = await Axios.post(REGISTER_USER, data, options);
 
-          if (res.status === 201) {
-            Swal.fire({
-              icon: 'success',
-              title: 'Usuario Creado',
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          Swal.fire({
-            position: 'top',
-            icon: 'error',
-            title: 'Error al crear',
-            showConfirmButton: false,
-            timer: 1500,
-          });
+        if (response.status === 201) {
+          cookies.set('userId', response.data.uid, { path: '/' });
+          props.history.push('/');
+          // cookies.set('userId', res.data.uid, { path: '/' });
+          // props.history.push('/');
+          // Swal.fire({
+          //   icon: 'success',
+          //   title: 'Usuario Creado',
+          //   showConfirmButton: false,
+          //   timer: 1500,
+          // });
+        }
+      } catch (error) {
+        // if (err.response && err.response.status === 400)
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al crear',
+          showConfirmButton: false,
+          timer: 1500,
         });
-      e.preventDefault();
+      }
     } else {
       Swal.fire({
-        position: 'top',
         icon: 'error',
         title: 'Las contraseñas no coinciden',
         showConfirmButton: false,
@@ -116,7 +107,7 @@ const Register = () => {
                     Contraseña
                   </label>
                   <input
-                    minlength="5"
+                    minLength="5"
                     type="password"
                     id="userPassword"
                     className="form-control form-control-sm"
@@ -130,7 +121,7 @@ const Register = () => {
                     Confirmar Contraseña
                   </label>
                   <input
-                    minlength="5"
+                    minLength="5"
                     type="password"
                     id="userConfirmPassword"
                     className="form-control form-control-sm"

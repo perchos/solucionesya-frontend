@@ -46,11 +46,8 @@ const Service = (props) => {
           setPost(response.data);
           setShowDisqus(true);
         }
-
-        // console.log(response.data);
       }
     } catch (error) {
-      // console.log(error);
       setPost({ data: { images: [] } });
       Swal.fire({
         icon: 'error',
@@ -74,9 +71,7 @@ const Service = (props) => {
       if (response.status === 200) {
         if (response.data.data) setUser(response.data);
       }
-      // console.log(response);
     } catch (error) {
-      // console.log(error);
       setUser({ data: {} });
     }
   };
