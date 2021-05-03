@@ -4,6 +4,7 @@ import { DiscussionEmbed } from 'disqus-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../assets/styles/Publishes.css';
+import Logo from '../assets/img/consejo.svg'
 
 const DOMAIN = 'http://localhost:5000';
 const GET_POST_URL = `${DOMAIN}/api/posts`;
@@ -75,7 +76,20 @@ const Service = (props) => {
   }, []);
 
   return (
-    <Container>
+    <>
+    <nav className="navbar navbar-light bg-light">
+        <Link className="navbar-brand" to={`/`}>
+          <img
+            src={ Logo }
+            width="30"
+            height="30"
+            className="d-inline-block align-top mx-2"
+            alt=""
+          />
+          Soluciones YA!
+        </Link>
+      </nav>
+    <Container className="bg-white my-4 p-5 border rounded box-shadow ">
       <Row className="my-5">
         <Col>
           <Carousel>
@@ -96,11 +110,11 @@ const Service = (props) => {
           </Carousel>
         </Col>
         <Col>
-          <h1>{post.data.title}</h1>
-          <p>{post.data.desc}</p>
-          <p>Telefono: {post.data.phone}</p>
-          <p>Locación: {post.data.location}</p>
-          <p>Price: {post.data.price}</p>
+          <h3>{post.data.title}</h3>
+          <p className="font-italic">{post.data.desc}</p>
+          <p className="border rounded p-3"><span className="font-weight-bold">Telefono: </span>{post.data.phone}</p>
+          <p className="border rounded p-3"><span className="font-weight-bold">Locación: </span>{post.data.location}</p>
+          <p className="border rounded p-3"><span className="font-weight-bold">Precio: </span>{post.data.price}</p>
         </Col>
       </Row>
       <Row>
@@ -110,8 +124,8 @@ const Service = (props) => {
             <img
               width={64}
               height={64}
-              className="mr-3"
-              src="https://dummyimage.com/64x64/000/fff"
+              className="mr-3 rounded-circle"
+              src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png"
               alt="UserPhoto"
             />
             <Media.Body>
@@ -128,6 +142,7 @@ const Service = (props) => {
       <Row></Row>
       <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
     </Container>
+    </>
   );
 };
 

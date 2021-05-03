@@ -11,7 +11,6 @@ const Register = () => {
   }
 
   function registerUser(e){
-
     const samePass = passValidator(e.target.userPassword.value, e.target.userConfirmPassword.value)
 
     if (samePass === true){
@@ -30,11 +29,38 @@ const Register = () => {
         body: JSON.stringify(data),
         headers:{'Content-Type': 'application/json'}
       }).then( res => {
+        console.log(res.status)
         console.log(res)
-        console.log("Registed")
+        if(res.status === 400){
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'El usuario ya existe',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
+
+        if(res.status === 201){
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Usuario Creado',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
+
       }).catch(
         err => {
           console.log(err)
+          Swal.fire({
+            position: 'top',
+            icon: 'error',
+            title: 'Error al crear',
+            showConfirmButton: false,
+            timer: 1500
+          })
         }
       )
       e.preventDefault()
@@ -72,12 +98,12 @@ const Register = () => {
 
             <div className="mt-1">
               <label className="mb-0" htmlFor="userPassword">Contraseña</label>
-              <input type="password" id="userPassword" className="form-control form-control-sm" placeholder="Escribe Tu Contraseña" required/>
+              <input minlength="5" type="password" id="userPassword" className="form-control form-control-sm" placeholder="Escribe Tu Contraseña" required/>
             </div>
             
             <div className="mt-1">
-              <label className="mb-0" htmlFor="userConfirmPassword">Confirmar Contraseña</label>
-              <input type="password" id="userConfirmPassword" className="form-control form-control-sm" placeholder="Repite La Contraseña" required/>
+              <label className="mb-0" htmlFor="userConfirmPassword" >Confirmar Contraseña</label>
+              <input minlength="5" type="password" id="userConfirmPassword" className="form-control form-control-sm" placeholder="Repite La Contraseña" required/>
             </div>
             
             <button className="btn btn-color btn-block mt-4" type="submit">Registrarme</button>

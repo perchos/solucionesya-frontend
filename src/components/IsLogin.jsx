@@ -32,7 +32,7 @@ const IsLogin = ({setUser}) => {
 
     return (
         <>
-            <Image src="https://dummyimage.com/40x40/000/fff" roundedCircle />
+            <Image src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png" width={50} roundedCircle />
             <Link to={toLink} >
                 <Button variant="outline-success mx-3">Mi perfil</Button>
             </Link>
