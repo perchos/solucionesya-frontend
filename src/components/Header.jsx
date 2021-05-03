@@ -38,45 +38,46 @@ const Header = ({ setCategory, setLocation, setSearch, getAll }) => {
 
   useEffect(() => {
     getUser();
+    // eslint-disable-next-line
   }, []);
 
   return (
     <header>
-      <Navbar className='bg-light justify-content-between'>
-        <Nav className='mr-auto'>
+      <Navbar className="bg-light justify-content-between">
+        <Nav className="mr-auto">
           <NavDropdown
-            title='Categoría ...'
-            id='category'
+            title="Categoría ..."
+            id="category"
             onSelect={handleCategory}
           >
-            <NavDropdown.Item eventKey=''>Sin filtro</NavDropdown.Item>
-            <NavDropdown.Item eventKey='Informática'>
+            <NavDropdown.Item eventKey="">Sin filtro</NavDropdown.Item>
+            <NavDropdown.Item eventKey="Informática">
               Informática
             </NavDropdown.Item>
-            <NavDropdown.Item eventKey='Electricidad'>
+            <NavDropdown.Item eventKey="Electricidad">
               Electricidad
             </NavDropdown.Item>
-            <NavDropdown.Item eventKey='Hogar'>Hogar</NavDropdown.Item>
-            <NavDropdown.Item eventKey='Otro'>Otro</NavDropdown.Item>
+            <NavDropdown.Item eventKey="Hogar">Hogar</NavDropdown.Item>
+            <NavDropdown.Item eventKey="Otro">Otro</NavDropdown.Item>
           </NavDropdown>
           <NavDropdown
-            title='Ubicación ...'
-            id='location'
+            title="Ubicación ..."
+            id="location"
             onSelect={handleLocation}
           >
-            <NavDropdown.Item eventKey=''>Sin filtro</NavDropdown.Item>
-            <NavDropdown.Item eventKey='Bogotá'>Bogotá</NavDropdown.Item>
-            <NavDropdown.Item eventKey='Cali'>Cali</NavDropdown.Item>
-            <NavDropdown.Item eventKey='Medellín'>Medellín</NavDropdown.Item>
+            <NavDropdown.Item eventKey="">Sin filtro</NavDropdown.Item>
+            <NavDropdown.Item eventKey="Bogotá">Bogotá</NavDropdown.Item>
+            <NavDropdown.Item eventKey="Cali">Cali</NavDropdown.Item>
+            <NavDropdown.Item eventKey="Medellín">Medellín</NavDropdown.Item>
           </NavDropdown>
           <Form inline>
             <FormControl
-              type='text'
-              placeholder='Buscar servicios'
-              className='mr-sm-2'
+              type="text"
+              placeholder="Buscar servicios"
+              className="mr-sm-2"
               onChange={handleChange}
             />
-            <Button variant='outline-info' onClick={getAll}>
+            <Button variant="outline-info" onClick={getAll}>
               Buscar
             </Button>
           </Form>
