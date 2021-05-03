@@ -6,8 +6,7 @@ import { Link } from 'react-router-dom';
 import { Container, Card } from 'react-bootstrap';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Swal from 'sweetalert2';
-import { Container, Row, CardGroup, Card } from 'react-bootstrap';
-import { GET_POST_URL } from "../utils/constants"
+import { GET_POST_URL } from '../utils/constants';
 
 const LIMIT = 16;
 
