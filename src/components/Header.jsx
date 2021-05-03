@@ -9,18 +9,14 @@ import {
 } from 'react-bootstrap';
 import IsLogin from './IsLogin';
 import IsLogout from './IsLogout';
-import Cookies from 'universal-cookie'
-import Axios from "axios";
-import { GET_USER_URL } from "../utils/constants"
-
-const url="http://localhost:5000/users"
-const cookies = new Cookies()
+import Cookies from 'universal-cookie';
+import Axios from 'axios';
+import { GET_USER_URL } from '../utils/constants';
 
 const Header = ({ setCategory, setLocation, setSearch, getAll }) => {
-  const [isLogged, setIsLogged] = useState(cookies.get ? true : false);
   const [user, setUser] = useState(null);
-const url = GET_USER_URL;
-const cookies = new Cookies();
+  const url = GET_USER_URL;
+  const cookies = new Cookies();
 
   const handleCategory = (e) => setCategory(e);
   const handleLocation = (e) => setLocation(e);
@@ -85,8 +81,7 @@ const cookies = new Cookies();
             </Button>
           </Form>
         </Nav>
-        {/* <Logged isLogged={isLogged} /> */}
-        { user ? <IsLogin setUser={setUser}/> : <IsLogout/> }
+        {user ? <IsLogin setUser={setUser} /> : <IsLogout />}
       </Navbar>
     </header>
   );
