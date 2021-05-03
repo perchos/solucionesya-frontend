@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from "react";
-import Cookies from "universal-cookie";
-import Axios from "axios";
-import { Link } from "react-router-dom";
-import Swal from "sweetalert2";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { DOMAIN } from "../utils/constants";
-import Logo from '../assets/img/consejo.svg'
+import React, { useEffect, useState } from 'react';
+import Cookies from 'universal-cookie';
+import Axios from 'axios';
+import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { DOMAIN } from '../utils/constants';
+import Logo from '../assets/img/consejo.svg';
 
 const cookies = new Cookies();
 const url = DOMAIN;
 
 function Users(props) {
-  const [isLogged, setIsLogged] = useState(cookies.get ? true : false);
+  // const [isLogged, setIsLogged] = useState(cookies.get ? true : false);
 
   const [user, setUser] = useState({ data: {} });
 
   const [posts, setPosts] = useState([]);
 
-  const toCheck = props.match.params.userId
+  const toCheck = props.match.params.userId;
 
-  const isUser = (cookies.get('userId') === toCheck) 
+  const isUser = cookies.get('userId') === toCheck;
 
   function getUser() {
     Axios.get(`${url}/users/${props.match.params.userId}`)
@@ -30,7 +30,7 @@ function Users(props) {
       .catch((err) => {
         console.log(props.match.params.userId);
         setUser({ data: {} });
-        props.history.push("/login");
+        props.history.push('/login');
       });
   }
 
@@ -46,22 +46,30 @@ function Users(props) {
   }
 
   function delPublishes(postId) {
-    console.log("entre");
-    Axios.delete(`${url}/api/posts/${postId}`).then((res) => {
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Eliminado Correctamente",
-        showConfirmButton: false,
-        timer: 1000,
+    const options = {
+      withCredentials: true,
+    };
+
+    console.log('entre');
+    Axios.delete(`${url}/api/posts/${postId}`, options)
+      .then((res) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Eliminado Correctamente',
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        getPublishes();
+      })
+      .catch((error) => {
+        console.log(error);
       });
-      getPublishes();
-    });
   }
 
   useEffect(() => {
     getUser();
     getPublishes();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -181,13 +189,15 @@ function Users(props) {
                   Mis Publicaciones
                 </a>
 
-                { isUser && <Link
-                  className="list-group-item list-group-item-action border my-2"
-                  id="nav-create-btn"
-                  to={`/publishes`}
-                >
-                  Crear Publicacion
-                </Link>}
+                {isUser && (
+                  <Link
+                    className="list-group-item list-group-item-action border my-2"
+                    id="nav-create-btn"
+                    to={`/publishes`}
+                  >
+                    Crear Publicacion
+                  </Link>
+                )}
                 <Link
                   className="list-group-item list-group-item-action border my-2"
                   id="nav-create-btn"

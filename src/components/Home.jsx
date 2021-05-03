@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { Container, Card } from 'react-bootstrap';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Swal from 'sweetalert2';
-import { GET_POST_URL } from '../utils/constants';
+// import { GET_POST_URL } from '../utils/constants';
 
 const LIMIT = 16;
 
@@ -60,6 +60,7 @@ const Home = () => {
 
   useEffect(() => {
     getAll();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -71,21 +72,21 @@ const Home = () => {
         getAll={getAll}
       />
       {posts && (
-        <Container className='my-4 text-center'>
+        <Container className="my-4 text-center">
           <InfiniteScroll
             dataLength={posts.length}
             next={getAll}
             hasMore={pagination.hasMore}
             loader={<h4>Loading...</h4>}
-            className='d-flex flex-wrap justify-content-around'
+            className="d-flex flex-wrap justify-content-around"
           >
             {posts.map((post) => (
-              <Card key={post._id} className='my-4' style={{ width: '18rem' }}>
-                <Link to={`/post/${post._id}`} className='text-dark'>
+              <Card key={post._id} className="my-4" style={{ width: '18rem' }}>
+                <Link to={`/post/${post._id}`} className="text-dark">
                   <Card.Header>
                     <Card.Title>{post.title}</Card.Title>
                   </Card.Header>
-                  <Card.Img variant='top' src={`${DOMAIN}/${post.images[0]}`} />
+                  <Card.Img variant="top" src={`${DOMAIN}/${post.images[0]}`} />
                   <Card.Body>
                     <Card.Text>{post.desc}</Card.Text>
                   </Card.Body>

@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import Axios from "axios";
-import Cookies from "universal-cookie";
-import "../assets/styles/Login.css";
-import Swal from 'sweetalert2'
-import { LOGIN_USER } from "../utils/constants"
+import React, { Component } from 'react';
+import Axios from 'axios';
+import Cookies from 'universal-cookie';
+import '../assets/styles/Login.css';
+import Swal from 'sweetalert2';
+import { LOGIN_USER } from '../utils/constants';
 
 const cookies = new Cookies();
 
@@ -15,19 +15,22 @@ class Login extends Component {
       password: this.password,
     };
 
-    Axios.post(LOGIN_USER, data)
+    const options = {
+      withCredentials: true,
+    };
+
+    Axios.post(LOGIN_USER, data, options)
       .then((res) => {
-        cookies.set("userId", res.data.uid, { path: "/" });
-        this.props.history.push('/')
+        cookies.set('userId', res.data.uid, { path: '/' });
+        this.props.history.push('/');
       })
       .catch((err) => {
         Swal.fire({
-          position: 'top',
           icon: 'error',
           title: 'Usuario y/o contraseña invalidos',
           showConfirmButton: false,
-          timer: 1500
-        })
+          timer: 1500,
+        });
       });
   };
 
