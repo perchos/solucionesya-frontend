@@ -47,10 +47,17 @@ const Register = (props) => {
         }
       } catch (error) {
         // if (err.response && err.response.status === 400)
-
+        let errorMessage = 'Error al crear usuario';
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.msg === 'User already exists'
+        ) {
+          errorMessage = 'El usuario ya existe';
+        }
         Swal.fire({
           icon: 'error',
-          title: 'Error al crear',
+          title: errorMessage,
           showConfirmButton: false,
           timer: 1500,
         });

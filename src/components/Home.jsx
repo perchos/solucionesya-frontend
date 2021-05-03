@@ -1,16 +1,14 @@
-import '../assets/styles/Home.css';
 import axios from 'axios';
 import Header from './Header';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Container, Card } from 'react-bootstrap';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Swal from 'sweetalert2';
-// import { GET_POST_URL } from '../utils/constants';
+import { Link } from 'react-router-dom';
+import { Container, Card } from 'react-bootstrap';
+import { DOMAIN, GET_POSTS_URL } from '../utils/constants';
+import '../assets/styles/Home.css';
 
 const LIMIT = 16;
-
-const DOMAIN = 'http://localhost:5000';
 
 const initialPaginationState = {
   hasMore: false,
@@ -43,7 +41,7 @@ const Home = () => {
       },
     };
     try {
-      const res = await axios.get(`${DOMAIN}/api/posts`, options);
+      const res = await axios.get(GET_POSTS_URL, options);
       if (res.status === 200) {
         const json = await res.data;
         if (json.data) {

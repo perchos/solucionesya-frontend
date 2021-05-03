@@ -9,7 +9,6 @@ import { DOMAIN } from '../utils/constants';
 import Logo from '../assets/img/consejo.svg';
 
 const cookies = new Cookies();
-const url = DOMAIN;
 
 function Users(props) {
   // const [isLogged, setIsLogged] = useState(cookies.get ? true : false);
@@ -23,7 +22,7 @@ function Users(props) {
   const isUser = cookies.get('userId') === toCheck;
 
   function getUser() {
-    Axios.get(`${url}/users/${props.match.params.userId}`)
+    Axios.get(`${DOMAIN}/users/${props.match.params.userId}`)
       .then((res) => {
         setUser({ ...res.data.data });
       })
@@ -34,7 +33,7 @@ function Users(props) {
   }
 
   function getPublishes() {
-    Axios.get(`${url}/users/posts/${props.match.params.userId}`)
+    Axios.get(`${DOMAIN}/users/posts/${props.match.params.userId}`)
       .then((res) => {
         setPosts(res.data.data[0].posts);
         ///console.log(res.data.data[0].posts);
@@ -49,7 +48,7 @@ function Users(props) {
       withCredentials: true,
     };
 
-    Axios.delete(`${url}/api/posts/${postId}`, options)
+    Axios.delete(`${DOMAIN}/api/posts/${postId}`, options)
       .then((res) => {
         Swal.fire({
           icon: 'success',
@@ -127,7 +126,7 @@ function Users(props) {
                           <img
                             width="200"
                             height="150"
-                            src={`${url}/${post.images[0]}`}
+                            src={`${DOMAIN}/${post.images[0]}`}
                             alt="..."
                           />
                         </div>
@@ -145,14 +144,16 @@ function Users(props) {
                                 >
                                   <FontAwesomeIcon icon={faEye} />
                                 </Link>
-                                <button
-                                  className="btn btn-danger"
-                                  onClick={() => delPublishes(post._id)}
-                                >
-                                  <span aria-hidden="true">
-                                    <FontAwesomeIcon icon={faTrash} />
-                                  </span>
-                                </button>
+                                {isUser && (
+                                  <button
+                                    className="btn btn-danger"
+                                    onClick={() => delPublishes(post._id)}
+                                  >
+                                    <span aria-hidden="true">
+                                      <FontAwesomeIcon icon={faTrash} />
+                                    </span>
+                                  </button>
+                                )}
                               </div>
                             </div>
                           </div>
