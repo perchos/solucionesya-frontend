@@ -96,8 +96,15 @@ const Home = () => {
             className="d-flex flex-wrap justify-content-around"
           >
             {posts.map((post) => (
-              <Card key={post._id} className="my-4" style={{ width: '18rem' }}>
-                <Link to={`/post/${post._id}`} className="text-dark">
+              <Card
+                key={post._id}
+                className="my-4 zoom"
+                style={{ width: '18rem' }}
+              >
+                <Link
+                  to={`/post/${post._id}`}
+                  className="text-dark text-decoration-none"
+                >
                   <Card.Header>
                     <Card.Title>{post.title}</Card.Title>
                   </Card.Header>

@@ -1,3 +1,9 @@
 .home {
   margin: 100px;
 }
+
+.zoom:hover {
+  background: rgb(240, 240, 240);
+  transform: scale(0.99);
+  transition: ease-in-out 0.12s;
+}
