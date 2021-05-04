@@ -3,6 +3,7 @@ import Cookies from 'universal-cookie';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import Loader from 'react-loader-spinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { DOMAIN } from '../utils/constants';
@@ -12,6 +13,8 @@ const cookies = new Cookies();
 
 function Users(props) {
   // const [isLogged, setIsLogged] = useState(cookies.get ? true : false);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [user, setUser] = useState({ data: {} });
 
@@ -44,6 +47,8 @@ function Users(props) {
   }
 
   function delPublishes(postId) {
+    setIsLoading(true);
+
     const options = {
       withCredentials: true,
     };
@@ -57,8 +62,10 @@ function Users(props) {
           timer: 1000,
         });
         getPublishes();
+        setIsLoading(false);
       })
       .catch((error) => {
+        setIsLoading(false);
         Swal.fire({
           icon: 'error',
           title: 'Error Eliminando',
@@ -145,14 +152,27 @@ function Users(props) {
                                   <FontAwesomeIcon icon={faEye} />
                                 </Link>
                                 {isUser && (
-                                  <button
-                                    className="btn btn-danger"
-                                    onClick={() => delPublishes(post._id)}
-                                  >
-                                    <span aria-hidden="true">
-                                      <FontAwesomeIcon icon={faTrash} />
-                                    </span>
-                                  </button>
+                                  <>
+                                    {isLoading && (
+                                      <Loader
+                                        type="TailSpin"
+                                        color="#1DCDA0"
+                                        height={30}
+                                        width={30}
+                                        className="pt-2"
+                                      />
+                                    )}
+                                    {!isLoading && (
+                                      <button
+                                        className="btn btn-danger"
+                                        onClick={() => delPublishes(post._id)}
+                                      >
+                                        <span aria-hidden="true">
+                                          <FontAwesomeIcon icon={faTrash} />
+                                        </span>
+                                      </button>
+                                    )}
+                                  </>
                                 )}
                               </div>
                             </div>
