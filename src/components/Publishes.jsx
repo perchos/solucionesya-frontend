@@ -12,6 +12,7 @@ import Cookies from 'universal-cookie';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import Loader from 'react-loader-spinner';
+import IsLogin from './IsLogin';
 import { POST_POST_URL, IMAGES_KEY_NAME } from '../utils/constants';
 import '../assets/styles/Publishes.css';
 import Logo from '../assets/img/consejo.svg';
@@ -30,7 +31,6 @@ const Publishes = (props) => {
   const { register, handleSubmit, control } = useForm();
 
   const onSubmit = async (data) => {
-    console.log('hi');
     setIsLoading(true);
     const formData = new FormData();
 
@@ -94,6 +94,7 @@ const Publishes = (props) => {
           />
           Soluciones YA!
         </Link>
+        {userId && <IsLogin notHome={true} />}
       </nav>
       <Container className="publishes my-5 p-5 bg-white border rounded shadow-lg">
         {isLoading && (

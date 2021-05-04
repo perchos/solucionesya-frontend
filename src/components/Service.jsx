@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { DOMAIN, GET_POST_URL, GET_USER_URL } from '../utils/constants';
+// import isLogin from './IsLogin';
 import '../assets/styles/Publishes.css';
 import Logo from '../assets/img/consejo.svg';
 

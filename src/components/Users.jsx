@@ -4,6 +4,7 @@ import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Loader from 'react-loader-spinner';
+import IsLogin from './IsLogin';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { DOMAIN } from '../utils/constants';
@@ -21,6 +22,8 @@ function Users(props) {
   const [posts, setPosts] = useState([]);
 
   const toCheck = props.match.params.userId;
+
+  const userId = cookies.get('userId');
 
   const isUser = cookies.get('userId') === toCheck;
 
@@ -94,6 +97,7 @@ function Users(props) {
           />
           Soluciones YA!
         </Link>
+        {userId && <IsLogin notHome={true} />}
       </nav>
       <div className="overflow-auto">
         <div className="m-5 d-flex flex-wrap">
