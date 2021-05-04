@@ -199,7 +199,7 @@ function Users(props) {
                   aria-controls="nav-user"
                   aria-selected="true"
                 >
-                  Mi perfil
+                  {isUser ? 'Mi p' : 'P'}erfil
                 </a>
                 <a
                   className="list-group-item list-group-item-action border my-2"
@@ -209,7 +209,7 @@ function Users(props) {
                   role="tab"
                   aria-controls="nav-publish"
                 >
-                  Mis Publicaciones
+                  {isUser ? 'Mis p' : 'P'}ublicaciones
                 </a>
 
                 {isUser && (
