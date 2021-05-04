@@ -50,8 +50,7 @@ const Home = () => {
 
           let hasMore;
 
-          if (json.data.hasNextPage) hasMore = true;
-          else hasMore = false;
+          hasMore = !!json.data.hasNextPage;
 
           const paginationObj = {
             ...pagination,
@@ -86,6 +85,10 @@ const Home = () => {
         setSearch={setSearch}
         getAll={getAll}
       />
+      <p className="display-3 text-dark text-lg-center mt-5 slogan">
+            Encuentra lo que necesitas
+      </p>
+        <p className="h2 text-danger text-lg-center mt-1">A solo un click!!</p>
       {posts && (
         <Container className="my-4 text-center">
           <InfiniteScroll
@@ -120,6 +123,6 @@ const Home = () => {
       )}
     </>
   );
-};
+}
 
 export default Home;

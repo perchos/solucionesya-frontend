@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
 .home {
   margin: 100px;
 }
@@ -6,4 +8,8 @@
   background: rgb(240, 240, 240);
   transform: scale(0.99);
   transition: ease-in-out 0.12s;
+}
+
+.slogan {
+  font-family: 'Oswald', sans-serif !important;
 }
