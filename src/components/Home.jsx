@@ -4,11 +4,12 @@ import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 import { Container, Card } from 'react-bootstrap';
 import { DOMAIN, GET_POSTS_URL } from '../utils/constants';
 import '../assets/styles/Home.css';
 
-const LIMIT = 16;
+const LIMIT = 8;
 
 const initialPaginationState = {
   hasMore: false,
@@ -22,8 +23,10 @@ const Home = () => {
   const [search, setSearch] = useState('');
   const [posts, setPosts] = useState([]);
   const [pagination, setPagination] = useState(initialPaginationState);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getAll = async (reset) => {
+    setIsLoading(true);
     let page;
     if (reset) {
       page = 1;
@@ -71,6 +74,8 @@ const Home = () => {
         text: 'Error al traer la información',
       });
     }
+
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -90,6 +95,17 @@ const Home = () => {
         Encuentra lo que necesitas
       </p>
       <p className="h2 text-danger text-lg-center mt-1">A solo un click!!</p>
+
+      {isLoading && (
+        <Loader
+          type="TailSpin"
+          color="#FFFFFF"
+          height={100}
+          width={100}
+          className="text-center mt-5"
+        />
+      )}
+
       {posts && (
         <Container className="my-4 text-center">
           <InfiniteScroll
