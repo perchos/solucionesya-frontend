@@ -48,6 +48,7 @@ const Home = () => {
       const res = await axios.get(GET_POSTS_URL, options);
       if (res.status === 200) {
         const json = await res.data;
+
         if (json.data) {
           if (reset) setPosts(json.data.docs);
           else setPosts([...posts, ...json.data.docs]);
@@ -117,7 +118,7 @@ const Home = () => {
           >
             {posts.map((post) => (
               <Card
-                key={post._id}
+                key={`${post._id}${Math.random()}`}
                 className="my-4 zoom"
                 style={{ width: '18rem' }}
               >
