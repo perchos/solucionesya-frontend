@@ -39,7 +39,7 @@ const Publishes = (props) => {
   const { register, handleSubmit, control } = useForm();
 
   const onSubmit = async (data) => {
-    // setIsLoading(true);
+    setIsLoading(true);
     const formData = new FormData();
 
     for (const key in data) {
