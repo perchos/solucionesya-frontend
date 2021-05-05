@@ -93,7 +93,7 @@ const Service = (props) => {
           Soluciones YA!
         </Link>
       </nav>
-      <Container className="bg-white my-4 p-5 border rounded box-shadow ">
+      <Container className="bg-white my-4 p-5 border rounded shadow ">
         <div className="text-right">
           <Button variant="secondary" onClick={() => props.history.goBack()}>
             Regresar
