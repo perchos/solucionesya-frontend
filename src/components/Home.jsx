@@ -40,6 +40,7 @@ const Home = () => {
         search,
       },
     };
+
     try {
       const res = await axios.get(GET_POSTS_URL, options);
       if (res.status === 200) {
@@ -86,9 +87,9 @@ const Home = () => {
         getAll={getAll}
       />
       <p className="display-3 text-dark text-lg-center mt-5 slogan">
-            Encuentra lo que necesitas
+        Encuentra lo que necesitas
       </p>
-        <p className="h2 text-danger text-lg-center mt-1">A solo un click!!</p>
+      <p className="h2 text-danger text-lg-center mt-1">A solo un click!!</p>
       {posts && (
         <Container className="my-4 text-center">
           <InfiniteScroll
@@ -123,6 +124,6 @@ const Home = () => {
       )}
     </>
   );
-}
+};
 
 export default Home;

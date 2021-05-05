@@ -133,31 +133,31 @@ const Service = (props) => {
               <span className="font-weight-bold">Precio: </span>
               {post.data.price}
             </p>
+            <p className="border rounded p-3">
+              <span className="font-weight-bold">Categoría: </span>
+              {post.data.category}
+            </p>
+            <div className="mt-5">
+              <Media>
+                <img
+                  width={64}
+                  height={64}
+                  className="mr-3 rounded-circle"
+                  src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png"
+                  alt="UserPhoto"
+                />
+                <Media.Body>
+                  <h5>{user.data.userName}</h5>
+                  {user.data._id && (
+                    <Link to={`/user/${user.data._id}`}>
+                      <p>Perfil</p>
+                    </Link>
+                  )}
+                </Media.Body>
+              </Media>
+            </div>
           </Col>
         </Row>
-        <Row>
-          <Col></Col>
-          <Col>
-            <Media>
-              <img
-                width={64}
-                height={64}
-                className="mr-3 rounded-circle"
-                src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png"
-                alt="UserPhoto"
-              />
-              <Media.Body>
-                <h5>{user.data.userName}</h5>
-                {user.data._id && (
-                  <Link to={`/user/${user.data._id}`}>
-                    <p>Perfil</p>
-                  </Link>
-                )}
-              </Media.Body>
-            </Media>
-          </Col>
-        </Row>
-        <Row></Row>
         {showDisqus && (
           <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
         )}

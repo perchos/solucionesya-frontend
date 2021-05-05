@@ -44,13 +44,17 @@ const Header = ({ setCategory, setLocation, setSearch, getAll }) => {
   return (
     <header>
       <Navbar className="bg-light justify-content-between">
-        <Nav className="mr-auto">
+        <Nav className="mr-2">
           <NavDropdown
-            title="Categoría ..."
+            title="Categoría"
             id="category"
+            key="category"
             onSelect={handleCategory}
+            className="text-white"
           >
-            <NavDropdown.Item eventKey="">Sin filtro</NavDropdown.Item>
+            <NavDropdown.Item eventKey="" active>
+              Sin filtro
+            </NavDropdown.Item>
             <NavDropdown.Item eventKey="Informática">
               Informática
             </NavDropdown.Item>
@@ -60,16 +64,23 @@ const Header = ({ setCategory, setLocation, setSearch, getAll }) => {
             <NavDropdown.Item eventKey="Hogar">Hogar</NavDropdown.Item>
             <NavDropdown.Item eventKey="Otro">Otro</NavDropdown.Item>
           </NavDropdown>
+        </Nav>
+        <Nav className="mr-2">
           <NavDropdown
-            title="Ubicación ..."
+            title="Ubicación"
             id="location"
+            key="location"
             onSelect={handleLocation}
           >
-            <NavDropdown.Item eventKey="">Sin filtro</NavDropdown.Item>
+            <NavDropdown.Item eventKey="" active>
+              Sin filtro
+            </NavDropdown.Item>
             <NavDropdown.Item eventKey="Bogotá">Bogotá</NavDropdown.Item>
             <NavDropdown.Item eventKey="Cali">Cali</NavDropdown.Item>
             <NavDropdown.Item eventKey="Medellín">Medellín</NavDropdown.Item>
           </NavDropdown>
+        </Nav>
+        <Nav className="mr-auto">
           <Form inline>
             <FormControl
               type="text"
