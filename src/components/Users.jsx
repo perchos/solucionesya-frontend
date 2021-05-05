@@ -69,12 +69,17 @@ function Users(props) {
       })
       .catch((error) => {
         setIsLoading(false);
-        Swal.fire({
-          icon: 'error',
-          title: 'Error Eliminando',
-          showConfirmButton: false,
-          timer: 1500,
-        });
+        if (error.response && error.response.status === 401) {
+          cookies.remove('userId', { path: '/' });
+          props.history.push('/login');
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error creando la publicación',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
       });
   }
 

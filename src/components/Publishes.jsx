@@ -20,9 +20,17 @@ import { Link } from 'react-router-dom';
 
 const cookies = new Cookies();
 
+const IMAGE_NUM_LIMIT = 4;
+const IMAGE_TOTAL_SIZE_LIMIT = 8000000;
+
 const Publishes = (props) => {
   const userId = cookies.get('userId');
   const [isLoading, setIsLoading] = useState(false);
+  const [loadedImagesData, setLoadedImagesData] = useState({
+    numFiles: 0,
+    totalSize: 0,
+    disabled: false,
+  });
 
   if (!userId) {
     props.history.push('/login');
@@ -31,7 +39,7 @@ const Publishes = (props) => {
   const { register, handleSubmit, control } = useForm();
 
   const onSubmit = async (data) => {
-    setIsLoading(true);
+    // setIsLoading(true);
     const formData = new FormData();
 
     for (const key in data) {
@@ -70,12 +78,17 @@ const Publishes = (props) => {
         props.history.goBack();
       }
     } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error creando la publicación',
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      if (error.response && error.response.status === 401) {
+        cookies.remove('userId', { path: '/' });
+        props.history.push('/login');
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error creando la publicación',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
     }
 
     setIsLoading(false);
@@ -221,7 +234,7 @@ const Publishes = (props) => {
                     </Col>
                   </Form.Row>
 
-                  <div className="custom-file">
+                  <div className="custom-file mt-2">
                     <input
                       type="file"
                       className="custom-file-input"
@@ -229,16 +242,58 @@ const Publishes = (props) => {
                       multiple
                       accept=".png, .jpg, .jpeg, .gif"
                       {...register(IMAGES_KEY_NAME, { required: true })}
+                      onChange={(value) => {
+                        const files = value.target.files;
+                        const numFiles = files.length;
+                        let totalSize = 0;
+                        for (let file of files) {
+                          totalSize += file.size;
+                        }
+
+                        let disabled = true;
+
+                        const validateLimits =
+                          numFiles <= IMAGE_NUM_LIMIT &&
+                          totalSize < IMAGE_TOTAL_SIZE_LIMIT;
+
+                        if (validateLimits) disabled = false;
+
+                        setLoadedImagesData({ numFiles, totalSize, disabled });
+                      }}
                     />
                     <label
-                      className="custom-file-label"
+                      className="custom-file-label "
                       htmlFor="images_selector"
                     >
-                      Elige Imagenes (max cant. 4 tamaño 8mb)
+                      Imagenes (máx número 4, máx tamaño 8mb)
                     </label>
+
+                    <div className="mt-1">
+                      <p className="my-2">
+                        ◾{' '}
+                        {loadedImagesData.numFiles === 0
+                          ? 'No hay'
+                          : loadedImagesData.numFiles}{' '}
+                        {loadedImagesData.numFiles === 1
+                          ? 'imagen'
+                          : 'imagenes'}{' '}
+                        cargada{loadedImagesData.numFiles === 1 ? '' : 's'}
+                      </p>
+                      {loadedImagesData.numFiles > IMAGE_NUM_LIMIT && (
+                        <p className="my-2">🛑 Superado # límite de imagenes</p>
+                      )}
+                      {!(
+                        loadedImagesData.totalSize < IMAGE_TOTAL_SIZE_LIMIT
+                      ) && <p className="my-2">⛔ Superado límite de tamaño</p>}
+                    </div>
                   </div>
 
-                  <Button variant="primary" className="my-3" type="submit">
+                  <Button
+                    variant="primary"
+                    className="my-3"
+                    type="submit"
+                    disabled={loadedImagesData.disabled}
+                  >
                     Publicar
                   </Button>
                 </Form>
