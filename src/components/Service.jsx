@@ -122,7 +122,7 @@ const Service = (props) => {
             <h3>{post.data.title}</h3>
             <p className="font-italic">{post.data.desc}</p>
             <p className="border rounded p-3">
-              <span className="font-weight-bold">Telefono: </span>
+              <span className="font-weight-bold">Teléfono: </span>
               {post.data.phone}
             </p>
             <p className="border rounded p-3">
