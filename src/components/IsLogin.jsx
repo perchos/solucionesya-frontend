@@ -1,12 +1,61 @@
 import React from 'react';
 import { Image, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import Cookies from 'universal-cookie';
+import Axios from 'axios';
+import { LOGOUT_USER } from '../utils/constants';
+import { useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
-const IsLogin = () => {
+const cookies = new Cookies();
+
+const IsLogin = ({ setUser, notHome }) => {
+  const userId = cookies.get('userId');
+  const toLink = `/user/${userId}`;
+  let history = useHistory();
+
+  const logOut = () => {
+    const options = {
+      withCredentials: true,
+    };
+
+    Axios.post(LOGOUT_USER, {}, options)
+      .then((res) => {
+        cookies.remove('userId', { path: '/' });
+
+        if (notHome) {
+          history.push('/');
+        } else {
+          setUser(null);
+        }
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: 'error',
+          title: "The session can't be closed",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
+  };
+
   return (
     <>
-      <Image src='https://dummyimage.com/40x40/000/fff' roundedCircle />
-      <span className='mx-2'>🔔</span>
-      <Button variant='outline-danger'>Cerrar Sesión</Button>
+      {!notHome && (
+        <>
+          <Image
+            src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png"
+            width={50}
+            roundedCircle
+          />
+          <Link to={toLink}>
+            <Button variant="outline-success mx-3">Mi perfil</Button>
+          </Link>
+        </>
+      )}
+      <Button variant="outline-danger" onClick={logOut}>
+        Cerrar Sesión
+      </Button>
     </>
   );
 };

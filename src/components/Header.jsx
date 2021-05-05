@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Navbar,
   Nav,
@@ -7,45 +7,99 @@ import {
   FormControl,
   Button,
 } from 'react-bootstrap';
-
 import IsLogin from './IsLogin';
 import IsLogout from './IsLogout';
+import Cookies from 'universal-cookie';
+import Axios from 'axios';
+import { GET_USER_URL } from '../utils/constants';
 
-function Logged({ isLogged }) {
-  if (isLogged) {
-    return <IsLogin />;
-  } else {
-    return <IsLogout />;
+const Header = ({ setCategory, setLocation, setSearch, getAll }) => {
+  const [user, setUser] = useState(null);
+  const url = GET_USER_URL;
+  const cookies = new Cookies();
+
+  const handleCategory = (e) => setCategory(e);
+  const handleLocation = (e) => setLocation(e);
+  const handleChange = (e) => setSearch(e.target.value);
+
+  const [categoryActive, setCategoryActive] = useState('');
+  const [locationActive, setLocationActive] = useState('');
+
+  function getUser() {
+    const authValidate = cookies.get('userId');
+
+    if (authValidate !== undefined) {
+      Axios.get(`${url}/${authValidate}`)
+        .then((res) => {
+          setUser(true);
+        })
+        .catch((err) => {
+          setUser(null);
+        });
+    }
   }
-}
 
-const Header = () => {
-  const [isLogged, setIsLogged] = useState(false);
+  useEffect(() => {
+    getUser();
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <header>
-      <Navbar className='bg-light justify-content-between'>
-        <Nav className='mr-auto'>
-          <NavDropdown title='Filtrar ...' id='filter'>
-            <NavDropdown.Item href='#'>Menor Precio</NavDropdown.Item>
-            <NavDropdown.Item href='#'>Mayor Precio</NavDropdown.Item>
-            <NavDropdown.Item href='#'>mejor Calificación</NavDropdown.Item>
+      <Navbar className="bg-light justify-content-between">
+        <Nav
+          className="mr-2"
+          activeKey={categoryActive}
+          onSelect={setCategoryActive}
+        >
+          <NavDropdown
+            title="Categoría"
+            id="category"
+            key="category"
+            onSelect={handleCategory}
+          >
+            <NavDropdown.Item eventKey="">Sin filtro</NavDropdown.Item>
+            <NavDropdown.Item eventKey="Informática">
+              Informática
+            </NavDropdown.Item>
+            <NavDropdown.Item eventKey="Electricidad">
+              Electricidad
+            </NavDropdown.Item>
+            <NavDropdown.Item eventKey="Hogar">Hogar</NavDropdown.Item>
+            <NavDropdown.Item eventKey="Otro">Otro</NavDropdown.Item>
           </NavDropdown>
-          <NavDropdown title='Ubicación ...' id='ubication'>
-            <NavDropdown.Item href='#'>Ciudad</NavDropdown.Item>
-            <NavDropdown.Item href='#'>Localidad</NavDropdown.Item>
-            <NavDropdown.Item href='#'>Más CercaIsLogout</NavDropdown.Item>
+        </Nav>
+        <Nav
+          className="mr-2"
+          activeKey={locationActive}
+          onSelect={setLocationActive}
+        >
+          <NavDropdown
+            title="Ubicación"
+            id="location"
+            key="location"
+            onSelect={handleLocation}
+          >
+            <NavDropdown.Item eventKey="">Sin filtro</NavDropdown.Item>
+            <NavDropdown.Item eventKey="Bogotá">Bogotá</NavDropdown.Item>
+            <NavDropdown.Item eventKey="Cali">Cali</NavDropdown.Item>
+            <NavDropdown.Item eventKey="Medellín">Medellín</NavDropdown.Item>
           </NavDropdown>
+        </Nav>
+        <Nav className="mr-auto">
           <Form inline>
             <FormControl
-              type='text'
-              placeholder='Buscar servicios'
-              className='mr-sm-2'
+              type="text"
+              placeholder="Buscar servicios"
+              className="mr-sm-2"
+              onChange={handleChange}
             />
-            <Button variant='outline-info'>Buscar</Button>
+            <Button variant="outline-info" onClick={() => getAll(true)}>
+              Buscar
+            </Button>
           </Form>
         </Nav>
-        <Logged isLogged={isLogged} />
+        {user ? <IsLogin setUser={setUser} /> : <IsLogout />}
       </Navbar>
     </header>
   );
