@@ -3,6 +3,7 @@ import '../assets/styles/Register.css';
 import Swal from 'sweetalert2';
 import Cookies from 'universal-cookie';
 import Axios from 'axios';
+import { Link } from 'react-router-dom';
 import { REGISTER_USER } from '../utils/constants';
 
 const cookies = new Cookies();
@@ -142,9 +143,9 @@ const Register = (props) => {
                 </button>
                 <p className="d-block text-center mt-3 small">
                   ¿Ya tienes una cuenta?
-                  <a className="d-block text-center mt-2" href="/login">
+                  <Link className="d-block text-center mt-2" to="/login">
                     Iniciar Sesión
-                  </a>
+                  </Link>
                 </p>
               </form>
             </div>

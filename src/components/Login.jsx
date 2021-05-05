@@ -3,6 +3,7 @@ import Axios from 'axios';
 import Cookies from 'universal-cookie';
 import '../assets/styles/Login.css';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 import { LOGIN_USER } from '../utils/constants';
 
 const cookies = new Cookies();
@@ -75,11 +76,11 @@ class Login extends Component {
                   </button>
                 </form>
 
-                <p className="d-block text-center mt-3 small" href="#">
+                <p className="d-block text-center mt-3 small">
                   ¿No tienes una cuenta?
-                  <a className="d-block text-center mt-2" href="/register">
+                  <Link className="d-block text-center mt-2" to="/register">
                     Registrarme
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>
