@@ -22,6 +22,9 @@ const Header = ({ setCategory, setLocation, setSearch, getAll }) => {
   const handleLocation = (e) => setLocation(e);
   const handleChange = (e) => setSearch(e.target.value);
 
+  const [categoryActive, setCategoryActive] = useState('');
+  const [locationActive, setLocationActive] = useState('');
+
   function getUser() {
     const authValidate = cookies.get('userId');
 
@@ -44,17 +47,18 @@ const Header = ({ setCategory, setLocation, setSearch, getAll }) => {
   return (
     <header>
       <Navbar className="bg-light justify-content-between">
-        <Nav className="mr-2">
+        <Nav
+          className="mr-2"
+          activeKey={categoryActive}
+          onSelect={setCategoryActive}
+        >
           <NavDropdown
             title="Categoría"
             id="category"
             key="category"
             onSelect={handleCategory}
-            className="text-white"
           >
-            <NavDropdown.Item eventKey="" active>
-              Sin filtro
-            </NavDropdown.Item>
+            <NavDropdown.Item eventKey="">Sin filtro</NavDropdown.Item>
             <NavDropdown.Item eventKey="Informática">
               Informática
             </NavDropdown.Item>
@@ -65,16 +69,18 @@ const Header = ({ setCategory, setLocation, setSearch, getAll }) => {
             <NavDropdown.Item eventKey="Otro">Otro</NavDropdown.Item>
           </NavDropdown>
         </Nav>
-        <Nav className="mr-2">
+        <Nav
+          className="mr-2"
+          activeKey={locationActive}
+          onSelect={setLocationActive}
+        >
           <NavDropdown
             title="Ubicación"
             id="location"
             key="location"
             onSelect={handleLocation}
           >
-            <NavDropdown.Item eventKey="" active>
-              Sin filtro
-            </NavDropdown.Item>
+            <NavDropdown.Item eventKey="">Sin filtro</NavDropdown.Item>
             <NavDropdown.Item eventKey="Bogotá">Bogotá</NavDropdown.Item>
             <NavDropdown.Item eventKey="Cali">Cali</NavDropdown.Item>
             <NavDropdown.Item eventKey="Medellín">Medellín</NavDropdown.Item>

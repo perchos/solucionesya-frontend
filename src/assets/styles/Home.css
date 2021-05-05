@@ -4,6 +4,10 @@
   margin: 100px;
 }
 
+.zoom {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
 .zoom:hover {
   background: rgb(240, 240, 240);
   transform: scale(0.99);
