@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+<img align="right" src="https://github.com/perchos/solucionesya-frontend/blob/main/src/assets/img/consejo.svg" width="200" alt="accessibility text">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Soluciones YA! ==> https://solucionesya.co/
 
-## Available Scripts
+### Type
+Web Application
 
-In the project directory, you can run:
+### Purpose
+Allow freelancers to get exposure on the internet by publishing the services they provide and their contact information in a centralized information hub.
 
-### `yarn start`
+### Importance
+According to the statistics of the World Bank  in Colombia, self-employed people represent the 50% of the working market.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Provider Problem
+Due to the importance of the internet nowadays, self-employed people with no presence online are missing on job opportunities.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Consumer problem
+In several cases freelancers are preferred over companies due to a lower price charged for their services.
 
-### `yarn test`
+### General Problem
+There are not many centralized platforms that allow self-employed people to publish their information online.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# TECHNOLOGIES & THIRD PARTY SERVICES
 
-### `yarn build`
+## Frontend
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### React
+<img src="https://icons-for-free.com/iconfiles/png/512/design+development+facebook+framework+mobile+react+icon-1320165723839064798.png" width="80" alt="accessibility text">
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### HTML5
+<img src="https://cdn.pixabay.com/photo/2017/08/05/11/16/logo-2582748_1280.png" width="80" alt="accessibility text">
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### CSS3
+<img src="https://cdn.pixabay.com/photo/2017/08/05/11/16/logo-2582747_1280.png" width="80" alt="accessibility text">
 
-### `yarn eject`
+#### JavaScript
+<img src="https://programarfacil.com/wp-content/uploads/2015/07/js-logo.png" width="80" alt="accessibility text">
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# How to Use 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Step 1
+into of directory execute `npm install` for install all dependencies
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Step 2
+Execute command `npm start` for starts the project in default port `3000` 
 
-## Learn More
+## Step 3
+Open in your browser localhost:3000 for see the application
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Remember
+The backend should be run first for that the frontend app works
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Authors
 
-### Code Splitting
+## Jhoan Zmora Caicedo - Backend developer - Scrum Master
+<img src="https://media-exp1.licdn.com/dms/image/C4D03AQHQyPKA6P5fNQ/profile-displayphoto-shrink_200_200/0/1517192271603?e=1625702400&v=beta&t=CAQ_Y2rXQHP7Shyvgr_FfcjwDBzzKgb7Ic1l8xkRIMU" width="100" alt="accessibility text">
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Angel Omar Pedroza - Backend developer
+<img src="https://media-exp1.licdn.com/dms/image/C5603AQHcBNIh_p6YbQ/profile-displayphoto-shrink_200_200/0/1615491670651?e=1620864000&v=beta&t=Onl8j7QOoilK905I1HmvHrF-DvF1HDYV_X15mgkrydE" width="100" alt="accessibility text">
 
-### Analyzing the Bundle Size
+## Michael Orlando Cocuy Garzón - Frontend developer
+<img src="https://avatars.githubusercontent.com/u/55103198?v=4" width="100" alt="accessibility text">
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Javier Andres Patarroyo - Frontend developer
+<img src="https://media-exp1.licdn.com/dms/image/C5603AQGrmManrRh96w/profile-displayphoto-shrink_200_200/0/1589763093557?e=1625702400&v=beta&t=4nAy1UMuPk0rR8i3HKK9nVSDEggb8HHSP-6ZNFllg0Q" width="100" alt="accessibility text">
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
